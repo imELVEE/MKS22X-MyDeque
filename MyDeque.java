@@ -12,11 +12,11 @@ public class MyDeque<E>{
   }
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
-      E[] d = (E[])new Object[initialCapacity];
-      data = d;
-      start = 0;
-      end = 0;
-      size = 0;
+    E[] d = (E[])new Object[initialCapacity];
+    data = d;
+    start = 0;
+    end = 0;
+    size = 0;
   }
   public int size(){
     return size;
@@ -36,6 +36,9 @@ public class MyDeque<E>{
   public void addLast(E element){
     data[end] = element;
     end++;
+    if (end == data.length){
+      loop();
+    }
     size++;
   }
   public E removeFirst(){
@@ -58,4 +61,25 @@ public class MyDeque<E>{
   public E getLast(){
     return data[end];
   }
+
+  private void biggerCopy(E[] ary){
+    @SuppressWarnings("unchecked")
+    E[] d = (E[])new Object[ary.length*2];
+    data = d;
+    end = start;
+    for (E item: ary){
+      addLast(item);
+    }
+  }
+
+  private void loop(){
+    if (start > 0){
+      end = 0;
+    }
+    else{
+      biggerCopy(data);
+    }
+  }
+
+
 }
