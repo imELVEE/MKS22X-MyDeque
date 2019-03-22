@@ -67,7 +67,10 @@ public class MyDeque<E>{
     E[] d = (E[])new Object[ary.length*2];
     data = d;
     end = start;
+    size = 0;
     for (E item: ary){
+      if (item == null)
+        size--;
       addLast(item);
     }
   }
