@@ -17,6 +17,14 @@ public class driver{
     System.out.println("remove: " + DATA.removeLast());
     DATA.addFirst((Integer)(-3));
     System.out.println("size: " + DATA.size() + "\n" + DATA);
-
+    for (int i = 0 ; i < 18 ; i++){
+      DATA.addFirst((Integer)i);
+      System.out.println("size: " + DATA.size() + "\n" + DATA);
+      if (i == 4){
+        System.out.println(DATA.getLast());
+      }
+    }
+    System.out.println("size: " + DATA.size() + "\n" + DATA);
+    //DATA.add
   }
 }

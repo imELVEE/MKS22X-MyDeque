@@ -23,18 +23,20 @@ public class MyDeque<E>{
   }
   public String toString(){
     String ans = "{";
-    for (int i = start ; i != end ; i++){
+    for (int i = start ; i != (end-1) ; i++){
       if (i == data.length){
           i = 0;
       }
-      ans += data[i] + " ";
+      if (data[i] != null)
+        ans += data[i] + " ";
     }
+    ans += data[(end-1)] + " ";
     return ans.substring(0,ans.length()-1) + "}";
   }
   public void addFirst(E element){
     start--;
-    if (start == -1 || start == end){
-      biggerCopy(data);
+    if (start == -1 || start == (end+1)){
+      biggerCopy(data,"start");
     }
     data[start] = element;
     size++;
@@ -46,8 +48,8 @@ public class MyDeque<E>{
     if (end == data.length){
       loop();
     }
-    if (end == start){
-      biggerCopy(data);
+    else if (end == start){
+      biggerCopy(data,"end");
     }
   }
   public E removeFirst(){
@@ -63,34 +65,50 @@ public class MyDeque<E>{
     return b4;
   }
   public E removeLast(){
-    E b4 = data[end];
-    data[end] = null;
-    end--;
-    size--;
-    if (end == -1)
-      end = data.length-1;
-    while (data[end] == null)
+    if ((end-1) != start){
+      E b4 = data[(end-1)];
+      data[(end-1)] = null;
       end--;
+      size--;
+      if ((end-1) == -1)
+        end = data.length-1;
+      while (data[(end-1)] == null)
+        end--;
+      return b4;
+    }
+    E b4 = data[(end-1)];
+    data[(end-1)]=null;
     return b4;
   }
   public E getFirst(){
     return data[start];
   }
   public E getLast(){
-    return data[end];
+    return data[(end-1)];
   }
 
-  private void biggerCopy(E[] ary){
+  private void biggerCopy(E[] ary, String mode){
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[ary.length*2];
     data = d;
-    start += ary.length-1;
-    end = start;
-    size = 0;
-    for (E item: ary){
-      if (item == null)
-        size--;
-      addLast(item);
+    if (mode.equals("start")){
+      start += ary.length;
+    }
+    for (int i = start ; i != (end-1) ; i++){
+      if (i == data.length){
+          i = 0;
+        }
+      if (mode.equals("start")){
+        if (i-ary.length > -1){
+          data[i] = ary[i-ary.length];
+        }
+      }
+      else{
+        data[i] = ary[i];
+      }
+    }
+    if (mode.equals("start")){
+      end--;
     }
   }
 
@@ -99,7 +117,7 @@ public class MyDeque<E>{
       end = 0;
     }
     else{
-      biggerCopy(data);
+      biggerCopy(data,"(end-1)");
     }
   }
 
