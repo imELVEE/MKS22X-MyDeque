@@ -33,16 +33,22 @@ public class MyDeque<E>{
   }
   public void addFirst(E element){
     start--;
+    if (start == -1 || start == end){
+      biggerCopy(data);
+    }
     data[start] = element;
     size++;
   }
   public void addLast(E element){
     data[end] = element;
     end++;
+    size++;
     if (end == data.length){
       loop();
     }
-    size++;
+    if (end == start){
+      biggerCopy(data);
+    }
   }
   public E removeFirst(){
     E b4 = data[start];
@@ -78,6 +84,7 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[ary.length*2];
     data = d;
+    start += ary.length-1;
     end = start;
     size = 0;
     for (E item: ary){
