@@ -24,7 +24,8 @@ public class driver{
         System.out.println(DATA.getLast());
       }
     }
+    DATA.addLast((Integer)(-8));
     System.out.println("size: " + DATA.size() + "\n" + DATA);
-    //DATA.add
+    System.out.println(DATA.getLast());
   }
 }

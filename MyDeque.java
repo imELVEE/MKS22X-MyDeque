@@ -107,9 +107,6 @@ public class MyDeque<E>{
         data[i] = ary[i];
       }
     }
-    if (mode.equals("start")){
-      end--;
-    }
   }
 
   private void loop(){
