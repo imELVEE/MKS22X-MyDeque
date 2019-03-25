@@ -23,8 +23,11 @@ public class MyDeque<E>{
   }
   public String toString(){
     String ans = "{";
-    for (E item : data){
-      ans += item + " ";
+    for (int i = start ; i != end ; i++){
+      if (i == data.length){
+          i = 0;
+      }
+      ans += data[i] + " ";
     }
     return ans.substring(0,ans.length()-1) + "}";
   }
@@ -46,6 +49,11 @@ public class MyDeque<E>{
     data[start] = null;
     start++;
     size--;
+    if (start == data.length)
+      start = 0;
+    while (data[start] == null){
+      start++;
+    }
     return b4;
   }
   public E removeLast(){
@@ -53,6 +61,10 @@ public class MyDeque<E>{
     data[end] = null;
     end--;
     size--;
+    if (end == -1)
+      end = data.length-1;
+    while (data[end] == null)
+      end--;
     return b4;
   }
   public E getFirst(){

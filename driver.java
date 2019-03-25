@@ -8,7 +8,15 @@ public class driver{
     System.out.println("size: " + DATA.size() + "\n" + DATA);
     System.out.println("remove: " + DATA.removeFirst());
     System.out.println("size: " + DATA.size() + "\n" + DATA);
-
+    System.out.println("remove: " + DATA.removeFirst());
+    System.out.println("remove: " + DATA.removeFirst());
+    System.out.println("size: " + DATA.size() + "\n" + DATA);
+    System.out.println("remove: " + DATA.removeLast());
+    System.out.println("size: " + DATA.size() + "\n" + DATA);
+    System.out.println("remove: " + DATA.removeLast());
+    System.out.println("remove: " + DATA.removeLast());
+    DATA.addFirst((Integer)(-3));
+    System.out.println("size: " + DATA.size() + "\n" + DATA);
 
   }
 }
