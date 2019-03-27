@@ -24,10 +24,10 @@ public class driver{
       System.out.println("STARTING VAL: " + DATA.getFirst());
       System.out.println("ENDING VAL: " + DATA.getLast() + "\n\n");
     }
-    System.out.println(DATA.getLast());
+
     DATA.addLast((Integer)(-8));
     System.out.println("size: " + DATA.size() + "\n" + DATA);
-    System.out.println(DATA.getLast());
+    System.out.println("ENDING VAL: " + DATA.getLast() + "\n\n");
     System.out.println("size: " + DATA.size() + "\n" + DATA);
   }
 }

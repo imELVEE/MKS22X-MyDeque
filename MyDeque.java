@@ -1,6 +1,7 @@
 public class MyDeque<E>{
-  private E[] data;
-  private int size, start, end;
+  public E[] data;
+  public int size, start, end;
+  private E ending;
 
   public MyDeque(){
     @SuppressWarnings("unchecked")
@@ -42,7 +43,7 @@ public class MyDeque<E>{
       if (start == -1){
         start = data.length-1;
       }
-      if (start == end){
+      if (start == end-1 || start == end+1){
         biggerCopy(data,"start");
       }
       data[start] = element;
@@ -60,12 +61,13 @@ public class MyDeque<E>{
       if (end == data.length){
         loop();
       }
-      else if (end == start){
+      else if (end == start-1 || end == start+1){
         biggerCopy(data,"start");
       }
       data[end] = element;
       size++;
     }
+    ending = element;
   }
   public E removeFirst(){
     E b4 = data[start];
@@ -86,6 +88,7 @@ public class MyDeque<E>{
   }
   public E removeLast(){
     E b4 = data[end];
+    ending = data[end-1];
     data[end] = null;
     size--;
     if (end == start){
@@ -125,11 +128,7 @@ public class MyDeque<E>{
         data[i] = ary[i];
       }
     }
-
-    System.out.println("ENDING-1: " + ary[end-1]);
-    System.out.println("ARY LENGTH: " + ary.length);
-    System.out.println("Start index: " + start);
-    System.out.println("End index: " + end);
+    data[end] = ending;
   }
 
   private void loop(){
