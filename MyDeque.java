@@ -84,7 +84,9 @@ public class MyDeque<E>{
     E b4 = data[start];
     data[start] = null;
     size--;
-    if (start == end){
+    if (size == 0){
+      end = start;
+      ending = data[end];
       return b4;
     }
     start++;
@@ -101,15 +103,27 @@ public class MyDeque<E>{
   public E removeLast(){
     if (data[start] == null)
       throw new NoSuchElementException("cannot remove null: removeLast");
+    if (size == 1){
+      return removeFirst();
+    }
     E b4 = data[end];
     data[end] = null;
     size--;
-    if (end == start){
+    if (size == 0){
+      end = start;
+      ending = data[end];
       return b4;
     }
     end--;
     if (end == -1)
       end = start+size-1;
+    while (data[end] == null){
+      end--;
+      if(start == end){
+        ending = data[end];
+        return b4;
+      }
+    }
     ending = data[end];
     return b4;
   }
@@ -119,9 +133,9 @@ public class MyDeque<E>{
     return data[start];
   }
   public E getLast(){
-    if (data[start]==null)
+    if (ending==null)
       throw new NoSuchElementException("no non null elements in deque: getlast");
-    return data[end];
+    return ending;
   }
 
   private void biggerCopy(E[] ary, String mode){

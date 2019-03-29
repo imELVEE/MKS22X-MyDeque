@@ -5,27 +5,28 @@ public class Calculator{
     public static double eval(String s){
       @SuppressWarnings("unchecked")
       MyDeque<Double> numbers = new MyDeque();
+      boolean isOp = false;
       String num = "";
       char[] ops = new char[] {'+','-','*','/','%'};
       for (int i = 0 ; i < s.length() ; i++){
+        //System.out.println(numbers);
+        isOp = false;
         for (char op: ops){
           if (s.charAt(i) == op){
-            Double first = numbers.getLast();
-            numbers.removeLast();
-            System.out.println(numbers+"\n");
+            isOp = true;
             Double second = numbers.getLast();
             numbers.removeLast();
-            System.out.println(numbers+"\n");
+            Double first = numbers.getLast();
+            numbers.removeLast();
             numbers.addLast(do3(first,second,op));
-            System.out.println(numbers+"\n");
+            //System.out.println("first: " + first +"\n" + "second: " + second + "\n" + numbers);
           }
         }
         if (s.charAt(i) == ' ' && num.length() > 0){
           numbers.addLast(Double.parseDouble(num));
-          System.out.println(numbers+"\n");
           num = "";
         }
-        else{
+        else if(!isOp && s.charAt(i) != ' '){
           num += s.charAt(i);
         }
       }
